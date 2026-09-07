@@ -1,1 +1,1 @@
-# thzmoviedb-discovery-app
+# themoviedb-discovery-app
