@@ -7,6 +7,4 @@
       ]
     }
   }
-}git add .devcontainer/devcontainer.json
-git commit -m "chore: add devcontainer.json to install Git Graph extension in the development container"
-git push origin main
+}
