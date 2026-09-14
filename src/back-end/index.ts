@@ -37,3 +37,12 @@ app.get('/api/movies/popular', async (_req: express.Request, res: express.Respon
     res.status(500).json({ error: 'Failed to fetch popular movies' });
   }
 });
+
+
+// Define a route handler for health check endpoint
+app.get('/api/health', (_req: express.Request, res: express.Response) => {
+  const response: { status: string } = { status: 'ok' };
+  res.json(response);
+});
+
+
