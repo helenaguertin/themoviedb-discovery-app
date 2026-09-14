@@ -1,0 +1,12 @@
+{
+  "name": "themoviedb-discovery-app-demo-2026-2027",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mhutchie.git-graph"
+      ]
+    }
+  }
+}git add .devcontainer/devcontainer.json
+git commit -m "chore: add devcontainer.json to install Git Graph extension in the development container"
+git push origin main
