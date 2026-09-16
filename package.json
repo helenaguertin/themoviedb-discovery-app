@@ -6,7 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:server": "tsx watch src/back-end/index.ts",
-    "prepare": "husky"
+    "prepare": "husky",
+
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:client": "vite"
+
   },
   "repository": {
     "type": "git",
@@ -29,9 +33,11 @@
     "@commitlint/config-conventional": "^21.2.2",
     "@types/express": "^5.0.6",
     "@types/node": "^26.5.0",
+    "concurrently": "^10.0.5",
     "devmoji": "^2.3.0",
     "husky": "^9.1.7",
     "tsx": "^4.23.13",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0"
   }
 }
