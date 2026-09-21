@@ -1,11 +1,7 @@
 {
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "allowImportingTsExtensions": true,
-    "noEmit": true
-  },
-  "include": ["src/front-end"],
-  "references": [{ "path": "./tsconfig.backend.json" }]
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.backend.json" },
+    { "path": "./tsconfig.frontend.json" }
+  ]
 }
