@@ -1,5 +1,6 @@
 import express from 'express';
 import { tmdbAccessToken } from './config';
+import { DEFAULT_LANGUAGE, DEFAULT_PAGE, DEFAULT_REGION } from './constants';
 import {
   MoviesApiResponse,
   TmdbMoviesRawResponse,
@@ -29,12 +30,21 @@ app.get(
     try {
       const tmdbUrl = new URL('https://api.themoviedb.org/3/movie/popular');
 
-      for (const parameter of ['page', 'language', 'region']) {
+      const defaultParameters: Record<string, string> = {
+        language: DEFAULT_LANGUAGE,
+        page: DEFAULT_PAGE,
+        region: DEFAULT_REGION,
+      };
+
+      for (const [parameter, defaultValue] of Object.entries(
+        defaultParameters,
+      )) {
         const value = req.query[parameter];
 
-        if (typeof value === 'string') {
-          tmdbUrl.searchParams.set(parameter, value);
-        }
+        tmdbUrl.searchParams.set(
+          parameter,
+          typeof value === 'string' ? value : defaultValue,
+        );
       }
 
       const response = await fetch(tmdbUrl, {
