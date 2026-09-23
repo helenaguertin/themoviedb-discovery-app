@@ -6,6 +6,5 @@
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-  "include": ["src/front-end"],
-  "references": [{ "path": "./tsconfig.backend.json" }]
+  "include": ["src/front-end", "src/back-end/schemas"]
 }
