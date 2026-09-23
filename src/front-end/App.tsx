@@ -4,20 +4,16 @@ import MovieItem from './components/MovieItem';
 import './app.css';
 
 export default function App() {
-  useEffect(() => {
-    // fetch data from an API /api/movies/popular
-    fetch('/api/movies/popular')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
-  }, []);
-
   const [movies, setMovies] = useState<Movie[] | null>(null);
 
-  // useEffect hook to fetch data from an API when the component mounts
   useEffect(() => {
-    fetch(`/api/movies/popular${window.location.search}`)
+    const queryParams = new URLSearchParams(window.location.search);
+
+    queryParams.set('language', queryParams.get('language') || 'fr-FR');
+    queryParams.set('page', queryParams.get('page') || '1');
+    queryParams.set('region', queryParams.get('region') || 'FR');
+
+    fetch(`/api/movies/popular?${queryParams.toString()}`)
       .then((response) => response.json())
       .then((data) => {
         console.log('Fetched movies data:', data); // Log the fetched data for debugging
