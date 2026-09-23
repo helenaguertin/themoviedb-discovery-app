@@ -26,33 +26,24 @@ app.listen(port, () => {
 // Define a route handler for fetching popular movies from TMDB API
 app.get(
   '/api/movies/popular',
-  async (req: express.Request, res: express.Response) => {
+  async (_req: express.Request, res: express.Response) => {
     try {
-      const tmdbUrl = new URL('https://api.themoviedb.org/3/movie/popular');
+      const queryParams = new URLSearchParams();
+      const { language, page, region } = _req.query;
 
-      const defaultParameters: Record<string, string> = {
-        language: DEFAULT_LANGUAGE,
-        page: DEFAULT_PAGE,
-        region: DEFAULT_REGION,
-      };
+      queryParams.append('language', (language as string) || DEFAULT_LANGUAGE);
+      queryParams.append('page', (page as string) || DEFAULT_PAGE);
+      queryParams.append('region', (region as string) || DEFAULT_REGION);
 
-      for (const [parameter, defaultValue] of Object.entries(
-        defaultParameters,
-      )) {
-        const value = req.query[parameter];
-
-        tmdbUrl.searchParams.set(
-          parameter,
-          typeof value === 'string' ? value : defaultValue,
-        );
-      }
-
-      const response = await fetch(tmdbUrl, {
-        headers: {
-          Authorization: `Bearer ${tmdbAccessToken}`,
-          'Content-Type': 'application/json;charset=utf-8',
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/popular?${queryParams.toString()}`,
+        {
+          headers: {
+            Authorization: `Bearer ${tmdbAccessToken}`,
+            'Content-Type': 'application/json;charset=utf-8',
+          },
         },
-      });
+      );
 
       if (!response.ok) {
         throw new Error(
