@@ -1,18 +1,9 @@
 import { useEffect, useState } from 'react';
 import type { Movie } from '../back-end/schemas/MoviesTypes';
 import MovieItem from './components/MovieItem';
-//import './app.css';
+import './app.css';
 
 export default function App() {
-  useEffect(() => {
-    // fetch data from an API /api/movies/popular
-    fetch('/api/movies/popular')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
-  }, []);
-
   const [movies, setMovies] = useState<Movie[] | null>(null);
 
   // useEffect hook to fetch data from an API when the component mounts
