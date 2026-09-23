@@ -17,8 +17,7 @@ export default function App() {
 
   // useEffect hook to fetch data from an API when the component mounts
   useEffect(() => {
-    // fetch data from an API /api/movies/popular
-    fetch('/api/movies/popular')
+    fetch(`/api/movies/popular${window.location.search}`)
       .then((response) => response.json())
       .then((data) => {
         console.log('Fetched movies data:', data); // Log the fetched data for debugging

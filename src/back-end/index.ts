@@ -25,17 +25,24 @@ app.listen(port, () => {
 // Define a route handler for fetching popular movies from TMDB API
 app.get(
   '/api/movies/popular',
-  async (_req: express.Request, res: express.Response) => {
+  async (req: express.Request, res: express.Response) => {
     try {
-      const response = await fetch(
-        'https://api.themoviedb.org/3/movie/popular',
-        {
-          headers: {
-            Authorization: `Bearer ${tmdbAccessToken}`,
-            'Content-Type': 'application/json;charset=utf-8',
-          },
+      const tmdbUrl = new URL('https://api.themoviedb.org/3/movie/popular');
+
+      for (const parameter of ['page', 'language', 'region']) {
+        const value = req.query[parameter];
+
+        if (typeof value === 'string') {
+          tmdbUrl.searchParams.set(parameter, value);
+        }
+      }
+
+      const response = await fetch(tmdbUrl, {
+        headers: {
+          Authorization: `Bearer ${tmdbAccessToken}`,
+          'Content-Type': 'application/json;charset=utf-8',
         },
-      );
+      });
 
       if (!response.ok) {
         throw new Error(
