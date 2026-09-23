@@ -1,25 +1,30 @@
 import { useEffect, useState } from 'react';
+import {
+  DEFAULT_LANGUAGE,
+  DEFAULT_PAGE,
+  DEFAULT_REGION,
+} from '../back-end/constants';
 import type { Movie } from '../back-end/schemas/MoviesTypes';
 import MovieItem from './components/MovieItem';
 import './app.css';
 
 export default function App() {
   const [movies, setMovies] = useState<Movie[] | null>(null);
+  const queryParams = new URLSearchParams(window.location.search);
+  const language = queryParams.get('language') || DEFAULT_LANGUAGE;
+  const page = queryParams.get('page') || DEFAULT_PAGE;
+  const region = queryParams.get('region') || DEFAULT_REGION;
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
+    const requestParams = new URLSearchParams({ language, page, region });
 
-    queryParams.set('language', queryParams.get('language') || 'fr-FR');
-    queryParams.set('page', queryParams.get('page') || '1');
-    queryParams.set('region', queryParams.get('region') || 'FR');
-
-    fetch(`/api/movies/popular?${queryParams.toString()}`)
+    fetch(`/api/movies/popular?${requestParams.toString()}`)
       .then((response) => response.json())
       .then((data) => {
         console.log('Fetched movies data:', data); // Log the fetched data for debugging
         setMovies(data.results); // Update the state with the fetched movies data
       });
-  }, []);
+  }, [language, page, region]);
 
   return (
     <main className="app-shell">
