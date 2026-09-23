@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { Movie } from '../back-end/schemas/MoviesTypes';
 import MovieItem from './components/MovieItem';
-import './app.css';
+//import './app.css';
 
 export default function App() {
   useEffect(() => {
