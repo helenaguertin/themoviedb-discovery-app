@@ -18,6 +18,7 @@
   "scripts": {
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
     "dev:server": "tsx watch src/back-end/index.ts",
     "prepare": "husky",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
@@ -37,6 +38,7 @@
   "devDependencies": {
     "@commitlint/cli": "^21.2.2",
     "@commitlint/config-conventional": "^21.2.2",
+    "@playwright/test": "^1.63.0",
     "@testing-library/react": "^16.3.3",
     "@types/express": "^5.0.6",
     "@types/node": "^26.5.0",
