@@ -14,7 +14,7 @@
     "url": "git+https://github.com/helenaguertin/themoviedb-discovery-app.git"
   },
   "type": "module",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
