@@ -10,6 +10,12 @@
   box-sizing: border-box;
 }
 
+#root {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
 body {
   min-width: 320px;
   min-height: 100vh;
