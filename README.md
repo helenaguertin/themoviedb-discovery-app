@@ -62,17 +62,22 @@ La commande initialise le schéma sans supprimer les données d'une base existan
 
 ## API locale
 
-| Méthode | Route                 | Description                                                       |
-| ------- | --------------------- | ----------------------------------------------------------------- |
-| `GET`   | `/api/health`         | Vérifie que le serveur répond.                                    |
-| `GET`   | `/api/movies/popular` | Renvoie les films populaires.                                     |
-| `GET`   | `/api/movies/:id`     | Renvoie les détails du film correspondant à son identifiant TMDB. |
+| Méthode | Route                  | Description                                                       |
+| ------- | ---------------------- | ----------------------------------------------------------------- |
+| `GET`   | `/api/health`          | Vérifie que le serveur répond.                                    |
+| `GET`   | `/api/movies/popular`  | Renvoie les films populaires.                                     |
+| `GET`   | `/api/movies/:id`      | Renvoie les détails du film correspondant à son identifiant TMDB. |
+| `GET`   | `/api/discover/movies` | Recherche une page de films TMDB par année de sortie principale.  |
 
-Les routes des films acceptent les paramètres `language`, `page` et `region`. Exemple :
+La route Discover exige une année entre `1000` et `9999` et accepte les paramètres optionnels `language`, `page` et `region`. Chaque appel récupère une seule page ; utilisez `page` pour consulter les suivantes. Exemple :
 
 ```text
+/api/discover/movies?year=2020
+/api/discover/movies?year=2020&language=en-US&page=2&region=US
 /api/movies/popular?language=fr-FR&page=1&region=FR
 ```
+
+Les autres routes de films acceptent également les paramètres `language`, `page` et `region`.
 
 ## Vérifications
 
