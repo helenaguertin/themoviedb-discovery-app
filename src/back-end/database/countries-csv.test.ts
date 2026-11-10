@@ -59,6 +59,9 @@ describe('countries-csv.ts', () => {
     expect(() => parseCountriesCsv(writeCsv('code,name\nFRA,France'))).toThrow(
       /Invalid country code/,
     );
+    expect(() => parseCountriesCsv(writeCsv('code,name\nfr,France'))).toThrow(
+      /Invalid country code/,
+    );
     expect(() => parseCountriesCsv(writeCsv('code,name\nFR,""'))).toThrow(
       /Invalid country name/,
     );

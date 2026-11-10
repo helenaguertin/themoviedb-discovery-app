@@ -52,7 +52,7 @@ export function parseCountriesCsv(filePath: string): Country[] {
       );
     }
 
-    const code = row[codeIndex].trim().toUpperCase();
+    const code = row[codeIndex].trim();
     const name = row[nameIndex].trim();
 
     if (!/^[A-Z]{2}$/.test(code)) {
