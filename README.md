@@ -5,6 +5,7 @@ Application web de découverte de films qui s'appuie sur l'API de [The Movie Dat
 ## Fonctionnalités
 
 - Liste des films populaires, avec pagination et paramètres de langue et de région.
+- Recherche des films par année de sortie via la route de découverte de TMDB.
 - Fiche détaillée pour chaque film.
 - Pages « À propos » et « Page introuvable ».
 - Thème clair ou sombre, conservé dans le navigateur.
@@ -46,17 +47,29 @@ Le serveur Express écoute sur le port `3000`. Vite sert l'interface sur le port
 
 ## API locale
 
-| Méthode | Route                 | Description                                                       |
-| ------- | --------------------- | ----------------------------------------------------------------- |
-| `GET`   | `/api/health`         | Vérifie que le serveur répond.                                    |
-| `GET`   | `/api/movies/popular` | Renvoie les films populaires.                                     |
-| `GET`   | `/api/movies/:id`     | Renvoie les détails du film correspondant à son identifiant TMDB. |
+| Méthode | Route                  | Description                                                       |
+| ------- | ---------------------- | ----------------------------------------------------------------- |
+| `GET`   | `/api/health`          | Vérifie que le serveur répond.                                    |
+| `GET`   | `/api/movies/popular`  | Renvoie les films populaires.                                     |
+| `GET`   | `/api/movies/:id`      | Renvoie les détails du film correspondant à son identifiant TMDB. |
+| `GET`   | `/api/discover/movies` | Renvoie une page de films correspondant à une année de sortie.    |
 
 Les routes des films acceptent les paramètres `language`, `page` et `region`. Exemple :
 
 ```text
 /api/movies/popular?language=fr-FR&page=1&region=FR
 ```
+
+La route de découverte exige le paramètre `year` (de `1000` à `9999`) et accepte
+les mêmes paramètres optionnels `language`, `page` et `region` :
+
+```text
+/api/discover/movies?year=2020
+/api/discover/movies?year=2020&language=en-US&page=2&region=US
+```
+
+Elle interroge une seule page de TMDB à chaque appel. Une année absente ou
+invalide renvoie HTTP 400 ; une erreur TMDB renvoie HTTP 500.
 
 ## Vérifications
 
